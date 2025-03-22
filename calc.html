@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .section {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        output {
+            display: block;
+            margin-top: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <h2>Percentage Calculator</h2>
+
+        <!-- Percentage Calculation Section -->
+        <div class="section">
+            <h3>What Percentage is X of Y?</h3>
+            <div class="input-group">
+                <label>Enter Whole:</label>
+                <input type="number" id="whole" oninput="calculatePercentage()" required>
+            </div>
+
+            <div class="input-group">
+                <label>Enter Part:</label>
+                <input type="number" id="part" oninput="calculatePercentage()" required>
+            </div>
+
+            <label>Result:</label>
+            <output id="result">0%</output>
+        </div>
+
+        <!-- Percentage Increase/Decrease Section -->
+        <div>
+            <h3>Percentage Increase/Decrease</h3>
+            <div class="input-group">
+                <label>Original Number:</label>
+                <input type="number" id="original" oninput="calculateChange()" required>
+            </div>
+
+            <div class="input-group">
+                <label>New Number:</label>
+                <input type="number" id="new" oninput="calculateChange()" required>
+            </div>
+
+            <label>Change:</label>
+            <output id="changeResult">0%</output>
+        </div>
+    </div>
+
+    <script>
+        function calculatePercentage() {
+            let whole = parseFloat(document.getElementById("whole").value) || 0;
+            let part = parseFloat(document.getElementById("part").value) || 0;
+            let result = whole > 0 ? ((part / whole) * 100).toFixed(2) + "%" : "0%";
+            document.getElementById("result").textContent = result;
+        }
+
+        function calculateChange() {
+            let original = parseFloat(document.getElementById("original").value) || 0;
+            let newNum = parseFloat(document.getElementById("new").value) || 0;
+            
+            if (original === 0) {
+                document.getElementById("changeResult").textContent = "N/A";
+                return;
+            }
+            
+            let change = ((newNum - original) / original) * 100;
+            let formattedChange = change.toFixed(2) + "%";
+            document.getElementById("changeResult").textContent = formattedChange;
+        }
+    </script>
+
+</body>
+</html>
